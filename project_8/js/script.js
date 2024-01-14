@@ -32,10 +32,10 @@ const convertBtnClick = () => {
     valueInput = mainInput.value;
     if (mainInput.getAttribute("placeholder") === "°C") {
       fDegreeResult = (valueInput * 9) / 5 + 32;
-      resultText.innerHTML = `The fahrenheit degree is ${fDegreeResult}`;
+      resultText.innerHTML = `The fahrenheit degree is ${fDegreeResult.toFixed(2)}`;
     } else {
       cDegreeResult = ((valueInput - 32) * 5) / 9;
-      resultText.innerHTML = `The centigrade degree is ${cDegreeResult}`;
+      resultText.innerHTML = `The centigrade degree is ${cDegreeResult.toFixed(2)}`;
     }
   }
 };

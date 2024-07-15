@@ -44,11 +44,17 @@ todosGenerator = (todosList) => {
         newTodoCompleteBtn = document.createElement('button');
         newTodoCompleteBtn.className = 'btn btn-success';
         newTodoCompleteBtn.innerHTML = 'Complete';
+        newTodoCompleteBtn.addEventListener('click', () => editTodoStatus(todo.id));
 
         newTodoDeleteBtn = document.createElement('button');
         newTodoDeleteBtn.className = 'btn btn-danger';
         newTodoDeleteBtn.innerHTML = 'Delete';
         newTodoDeleteBtn.addEventListener('click', () => deleteTodo(todo.id));
+
+        if (todo.status) {
+            newTodoLiElem.className = 'uncompleted well';
+            newTodoCompleteBtn.innerHTML = 'UnCompleted';
+        }
 
         newTodoLiElem.append(newTodoLabelElem, newTodoCompleteBtn, newTodoDeleteBtn);
 
@@ -56,6 +62,14 @@ todosGenerator = (todosList) => {
 
     });
 };
+
+editTodoStatus = (todoId) => {
+    let todoIndex = todosList.findIndex(todo => todo.id === todoId);
+    todosList[todoIndex].status = !todosList[todoIndex].status;
+    setLocalStorage(todosList);
+    todosGenerator(todosList);
+
+}
 
 deleteTodo = (todoId) => {
     let todoIndex = todosList.findIndex(todo => todo.id === todoId);

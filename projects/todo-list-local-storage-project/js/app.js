@@ -48,6 +48,7 @@ todosGenerator = (todosList) => {
         newTodoDeleteBtn = document.createElement('button');
         newTodoDeleteBtn.className = 'btn btn-danger';
         newTodoDeleteBtn.innerHTML = 'Delete';
+        newTodoDeleteBtn.addEventListener('click', () => deleteTodo(todo.id));
 
         newTodoLiElem.append(newTodoLabelElem, newTodoCompleteBtn, newTodoDeleteBtn);
 
@@ -55,6 +56,13 @@ todosGenerator = (todosList) => {
 
     });
 };
+
+deleteTodo = (todoId) => {
+    let todoIndex = todosList.findIndex(todo => todo.id === todoId);
+    todosList.splice(todoIndex, 1);
+    setLocalStorage(todosList);
+    todosGenerator(todosList);
+}
 
 getTodoList = () => {
     let todos = localStorage.getItem('todos');
